@@ -12,9 +12,9 @@ Mittel: Undo, U15, Ü15 und ↻. Klein: U15 und Ü15, Undo und ↻ oben. Sperrbi
 
 ## Aktualisierung
 
-- Nach jedem Tipp zeichnet sich das Widget sofort neu, mit dem aktuellen Stand des ganzen Teams. Der gedrückte Knopf leuchtet etwa 2 Sekunden grün (Undo rot) und wird dann wieder normal.
-- ↻ holt den Stand, ohne zu zählen.
-- Von selbst lädt das Widget neu, wenn iOS es erlaubt; das ist meist nach einigen Minuten. Zählt jemand anders, erscheint das deshalb erst beim nächsten eigenen Tipp, bei ↻ oder wenn iOS neu lädt. Schneller geht es bei einem Widget nicht: iOS teilt jedem Widget nur eine begrenzte Zahl an Neuladungen pro Tag zu.
+- Nach jedem Tipp zeichnet sich das Widget sofort neu, mit dem aktuellen Stand des ganzen Teams. Der gedrückte Knopf leuchtet etwa 2 Sekunden grün (Undo rot).
+- **Mit Scripting PRO** läuft `index.tsx` nach dem Start im Hintergrund weiter (bis zu 12 Stunden): Es holt alle 15 Sekunden den Stand, zeichnet das Widget neu, wenn jemand anders gezählt hat, und beendet das Grün pünktlich. Ein neuer Start von `index.tsx` ersetzt den laufenden. Beenden: in Scripting das laufende Skript stoppen.
+- Ohne PRO lädt das Widget nur bei Tipps, bei ↻ und wenn iOS es erlaubt (meist nach einigen Minuten).
 
 ## Aufbau
 
@@ -24,6 +24,6 @@ Mittel: Undo, U15, Ü15 und ↻. Klein: U15 und Ü15, Undo und ↻ oben. Sperrbi
 | `api.ts` | Anfragen an die ChaxterLog-API |
 | `app_intents.tsx` | Knopf-Aktionen: Anfrage senden, Stand speichern, Widget neu zeichnen |
 | `widget.tsx` | Ansicht für klein, mittel und Sperrbildschirm |
-| `index.tsx` | Token einrichten, prüfen, Vorschau |
+| `index.tsx` | Token einrichten, prüfen, im Hintergrund aktuell halten (PRO) |
 
 Der Token steht nie im Code. Er liegt im Schlüsselbund des Skripts und, weil Widget-Erweiterungen den Schlüsselbund nicht immer lesen können, zusätzlich im privaten Speicher des Skripts auf dem Gerät.

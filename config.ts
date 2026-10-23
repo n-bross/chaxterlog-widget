@@ -19,6 +19,10 @@ export type ChaxterState = {
 export type Flash = "" | "u15" | "o15" | "undo" | "refresh" | "error"
 export type StoredState = ChaxterState & { fetchedAt: number; flash?: Flash; flashAt?: number }
 export const FLASH_MS = 2000
+// With Scripting PRO, index.tsx keeps running in the background: it fetches the totals every
+// POLL_MS and clears the highlight on time. RUNNER_KEY lets a new run stop an older loop.
+export const POLL_MS = 15_000
+export const RUNNER_KEY = "chaxterlog.widgetRunner"
 
 // The token is kept in this script's Keychain. Widget extensions may not reach the Keychain,
 // so a copy also goes to the script's private Storage, which stays on the device.
