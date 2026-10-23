@@ -1,6 +1,7 @@
 // BackgroundKeeper, Dialog, Keychain and Storage are Scripting globals, not module exports.
 import { Script, Widget } from "scripting"
 import { callApi } from "./api"
+import { startSilentAudio } from "./audio"
 import { FLASH_MS, POLL_MS, RUNNER_KEY, SHARED, STATE_KEY, clearToken, isToken, readToken, saveToken, type StoredState } from "./config"
 
 const MAX_RUNTIME_MS = 12 * 60 * 60 * 1000
@@ -71,10 +72,13 @@ async function main() {
     await Widget.preview({ family: "systemMedium" })
     return
   }
+  let stopAudio: (() => Promise<void>) | null = null
   try {
+    try { stopAudio = await startSilentAudio() } catch (error) { console.log(`Audio: ${String(error)}`) }
     await Dialog.alert({ title: "ChaxterLog", message: "Das Widget aktualisiert sich jetzt automatisch, auch wenn andere zählen. Scripting darf in den Hintergrund." })
     await keepWidgetCurrent()
   } finally {
+    await stopAudio?.()
     await BackgroundKeeper.stopKeepAlive()
   }
 }

@@ -23,6 +23,9 @@ export const FLASH_MS = 2000
 // POLL_MS and clears the highlight on time. RUNNER_KEY lets a new run stop an older loop.
 export const POLL_MS = 15_000
 export const RUNNER_KEY = "chaxterlog.widgetRunner"
+// How the background loop gets its reloads past iOS's daily widget limit (see audio.ts):
+// "mix" silent audio alongside music, "nowPlaying" silent audio as the Now Playing app, "off" none.
+export const AUDIO_MODE: "mix" | "nowPlaying" | "off" = "mix"
 
 // The token is kept in this script's Keychain. Widget extensions may not reach the Keychain,
 // so a copy also goes to the script's private Storage, which stays on the device.
