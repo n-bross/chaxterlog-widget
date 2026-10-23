@@ -13,7 +13,10 @@ export type ChaxterState = {
   refreshedAt: string
   message: string
 }
-export type StoredState = ChaxterState & { fetchedAt: number }
+// flash marks the button whose tap just succeeded; it is shown only shortly after flashAt.
+export type Flash = "" | "u15" | "o15" | "undo" | "refresh" | "error"
+export type StoredState = ChaxterState & { fetchedAt: number; flash?: Flash; flashAt?: number }
+export const FLASH_MS = 1400
 
 // The token is kept in this script's Keychain. Widget extensions may not reach the Keychain,
 // so a copy also goes to the script's private Storage, which stays on the device.
