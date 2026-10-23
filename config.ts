@@ -3,6 +3,8 @@
 export const BASE_URL = "https://chaxterlog.jufo-grafing.de/api/v1"
 const TOKEN_KEY = "chaxterlog.token"
 export const STATE_KEY = "chaxterlog.widgetState"
+// The intents run in the Scripting app, the widget in its extension: the state must be shared.
+export const SHARED = { shared: true }
 
 export type ChaxterState = {
   u15: number
@@ -16,7 +18,7 @@ export type ChaxterState = {
 // flash marks the button whose tap just succeeded; it is shown only shortly after flashAt.
 export type Flash = "" | "u15" | "o15" | "undo" | "refresh" | "error"
 export type StoredState = ChaxterState & { fetchedAt: number; flash?: Flash; flashAt?: number }
-export const FLASH_MS = 1400
+export const FLASH_MS = 2000
 
 // The token is kept in this script's Keychain. Widget extensions may not reach the Keychain,
 // so a copy also goes to the script's private Storage, which stays on the device.

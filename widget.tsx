@@ -1,7 +1,7 @@
 import { Button, HStack, Image, Spacer, Text, VStack, Widget } from "scripting"
 import { CountIntent, RefreshIntent, UndoIntent } from "./app_intents"
 import { callApi } from "./api"
-import { FLASH_MS, STATE_KEY, clock, type Flash, type StoredState } from "./config"
+import { FLASH_MS, SHARED, STATE_KEY, clock, type Flash, type StoredState } from "./config"
 
 // The website's counter colours: U15 petrol, Ü15 yellow, Undo a white key with the undo arrow.
 const PETROL = "#007ca5", YELLOW = "#fffd24", YELLOW_INK = "#10222b", INK = "#151515", MUTED = "#6f6f6f"
@@ -16,12 +16,12 @@ const tile = (color: string) => ({ style: color, shape: { type: "rect", cornerRa
 const FRESH_MS = 20_000
 
 async function loadState(): Promise<StoredState> {
-  const stored = Storage.get<StoredState>(STATE_KEY)
+  const stored = Storage.get<StoredState>(STATE_KEY, SHARED)
   if (stored && Date.now() - stored.fetchedAt < FRESH_MS) return stored
   const result = await callApi("/today")
   if (result.ok) {
     const state = { ...result.state, fetchedAt: Date.now() }
-    Storage.set(STATE_KEY, state)
+    Storage.set(STATE_KEY, state, SHARED)
     return state
   }
   return { ...(stored ?? { u15: 0, o15: 0, total: 0, changedAt: "–", fetchedAt: 0 }), refreshedAt: clock(new Date()), message: result.message }

@@ -12,9 +12,9 @@ Mittel: Undo, U15, Ü15 und ↻. Klein: U15 und Ü15, Undo und ↻ oben. Sperrbi
 
 ## Aktualisierung
 
-- Nach jedem Tipp zeichnet sich das Widget sofort neu, mit dem aktuellen Stand des ganzen Teams.
+- Nach jedem Tipp zeichnet sich das Widget sofort neu, mit dem aktuellen Stand des ganzen Teams. Der gedrückte Knopf leuchtet etwa 2 Sekunden grün (Undo rot) und wird dann wieder normal.
 - ↻ holt den Stand, ohne zu zählen.
-- Von selbst lädt das Widget neu, wenn iOS es erlaubt; das ist meist nach einigen Minuten.
+- Von selbst lädt das Widget neu, wenn iOS es erlaubt; das ist meist nach einigen Minuten. Zählt jemand anders, erscheint das deshalb erst beim nächsten eigenen Tipp, bei ↻ oder wenn iOS neu lädt. Schneller geht es bei einem Widget nicht: iOS teilt jedem Widget nur eine begrenzte Zahl an Neuladungen pro Tag zu.
 
 ## Aufbau
 

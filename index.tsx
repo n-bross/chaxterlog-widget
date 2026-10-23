@@ -1,7 +1,7 @@
 // Dialog, Keychain and Storage are Scripting globals, not module exports.
 import { Script, Widget } from "scripting"
 import { callApi } from "./api"
-import { STATE_KEY, clearToken, isToken, readToken, saveToken } from "./config"
+import { SHARED, STATE_KEY, clearToken, isToken, readToken, saveToken } from "./config"
 
 async function askToken() {
   const input = (await Dialog.prompt({
@@ -30,7 +30,7 @@ async function main() {
     await Dialog.alert({ title: "ChaxterLog", message: check.message })
     return
   }
-  Storage.set(STATE_KEY, { ...check.state, fetchedAt: Date.now() })
+  Storage.set(STATE_KEY, { ...check.state, fetchedAt: Date.now() }, SHARED)
   Widget.reloadAll()
   await Widget.preview({ family: "systemMedium" })
 }
